@@ -9,7 +9,7 @@ quite helpful as template for this gem.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'capistrano-middleman'
+gem 'capistrano-middleman', require: false
 ```
 
 And then execute:
