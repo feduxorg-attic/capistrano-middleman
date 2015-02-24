@@ -1,6 +1,8 @@
 # Capistrano::Middleman
 
-TODO: Write a gem description
+Deploy middleman app with the help of capistrano 3.
+[`capistrano-scm-copy`](https://github.com/wercker/capistrano-scm-copy) was
+quite helpful as template for this gem.
 
 ## Installation
 
@@ -20,7 +22,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You just need to change `:scm` to `:middleman`.
+
+```
+set :scm, :middleman
+```
+
+And make sure you've got the following software installed:
+
+Machine running Capistrano:
+
+* Capistrano 3
+* tar
+
+Servers:
+
+* mktemp
+* tar
 
 ## Contributing
 
