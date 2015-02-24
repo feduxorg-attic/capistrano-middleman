@@ -7,9 +7,15 @@ namespace :middleman do
 
   exclude_args = exclude_dir.map { |dir| "--exclude '#{dir}'"}
   tar_roles    = fetch(:tar_roles, :all)
+  middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
 
   task :build do
-    Middleman::Cli::Build.start
+    cmd = []
+    cmd << 'middleman'
+    cmd << 'build'
+    cmd.concat middleman_options
+
+    sh cmd.join(' ')
   end
 
   desc "Archive files to #{archive_name}"
