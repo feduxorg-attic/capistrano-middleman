@@ -1,9 +1,10 @@
-require 'tempfile'
+require 'tmpdir'
+require 'securerandom'
 
 namespace :middleman do
   middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
 
-  archive_name      = fetch :archive_name, Tempfile.new(%w(deploy .tar.gz))
+  archive_name      = fetch :archive_name, File.join(File.tmpdir, format('deploy-%s.tar.gz', SecureRandom.hex))
   build_dir         = fetch :build_dir, File.expand_path('build')
   exclude_dir       = Array(fetch(:exclude_dir))
 
@@ -19,7 +20,7 @@ namespace :middleman do
     sh cmd.join(' ')
   end
 
-  desc "Archive files to #{archive_name.path}"
+  desc "Archive files to #{archive_name}"
   file archive_name => FileList[build_dir].exclude(archive_name) do |t|
     Rake::Task['middleman:build'].invoke
     cmd = ["tar -cvzf #{t.name}", *exclude_args, *t.prerequisites]
