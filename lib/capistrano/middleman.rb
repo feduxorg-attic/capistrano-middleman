@@ -1,6 +1,2 @@
 require 'capistrano/middleman/version'
-
-module Capistrano
-  module Middleman
-  end
-end
+load File.expand_path('../tasks/middleman.rake', __FILE__)
