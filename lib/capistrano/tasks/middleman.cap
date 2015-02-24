@@ -24,11 +24,10 @@ namespace :middleman do
   desc 'Cleaning up deploy'
   task :clean do |t|
     FileUtils.rm_rf build_dir
-    FileUtils.rm_f archive_name
   end
 
   desc "Archive files to #{archive_name}"
-  file archive_name => FileList[build_dir].exclude(archive_name) do |t|
+  file archive_name => FileList[build_dir] do |t|
     Rake::Task['middleman:build'].invoke
     cmd = ["tar -cvzf #{t.name}", *exclude_args, *t.prerequisites]
     sh cmd.join(' ')
