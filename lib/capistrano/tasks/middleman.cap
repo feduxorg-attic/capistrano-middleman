@@ -8,7 +8,8 @@ namespace :middleman do
   exclude_args      = exclude_dir.map { |dir| "--exclude '#{dir}'"}
   tar_roles         = fetch(:tar_roles, :all)
 
-  task :build do
+  desc 'Build site'
+  task :build_site do
     cmd = []
     cmd << 'middleman'
     cmd << 'build'
@@ -19,7 +20,7 @@ namespace :middleman do
 
   desc "Archive files to #{archive_name}"
   file archive_name => FileList[build_dir].exclude(archive_name) do |t|
-    Rake::Task['middleman:build'].invoke
+    Rake::Task['middleman:build_site'].invoke
     cmd = ["tar -cvzf #{t.name}", *exclude_args, *t.prerequisites]
     sh cmd.join(' ')
   end
