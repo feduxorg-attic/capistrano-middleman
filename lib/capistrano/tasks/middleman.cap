@@ -26,9 +26,10 @@ namespace :middleman do
     FileUtils.rm_rf build_dir
   end
 
+  rule build_dir => 'middleman:build'
+
   desc "Archive files to #{archive_name}"
   file archive_name => FileList[build_dir] do |t|
-    Rake::Task['middleman:build'].invoke
     cmd = ["tar -cvzf #{t.name}", *exclude_args, *t.prerequisites]
     sh cmd.join(' ')
   end
