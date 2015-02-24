@@ -1,10 +1,7 @@
-require 'tmpdir'
-require 'securerandom'
-
 namespace :middleman do
   middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
 
-  archive_name      = fetch :archive_name, File.join(Dir.tmpdir, format('deploy-%s.tar.gz', SecureRandom.hex))
+  archive_name      = fetch :archive_name, 'archive.tar.gz'
   build_dir         = fetch :build_dir, 'build'
   exclude_dir       = Array(fetch(:exclude_dir))
 
@@ -24,13 +21,14 @@ namespace :middleman do
   desc 'Cleaning up deploy'
   task :clean do |t|
     FileUtils.rm_rf build_dir
+    FileUtils.rm_rf archive_name
   end
 
   rule build_dir => 'middleman:build'
 
   desc "Archive files to #{archive_name}"
-  file archive_name => build_dir do |t|
-    cmd = ["tar -cvzf #{t.name}", *exclude_args, FileList[t.prerequisites].to_a]
+  file archive_name => FileList[build_dir] do |t|
+    cmd = ["tar -cvzf #{t.name}", *exclude_args, *t.prerequisites]
     sh cmd.join(' ')
   end
 
