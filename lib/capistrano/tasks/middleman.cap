@@ -11,26 +11,12 @@ namespace :middleman do
   exclude_args      = exclude_dir.map { |dir| "--exclude '#{dir}'"}
   tar_roles         = fetch(:tar_roles, :all)
 
-  desc 'Build the site using middleman'
-  task :build do
-    cmd = []
-    cmd << 'middleman'
-    cmd << 'build'
-    cmd.concat middleman_options
-
-    sh cmd.join(' ')
-  end
-
-  desc 'Cleaning up deploy'
-  task :clean do |t|
-    FileUtils.rm_rf build_dir
-  end
-
-  rule build_dir => 'middleman:build'
-
   desc "Archive files to #{archive_name}"
-  file archive_name => build_dir do |t|
-    cmd = ["tar -cvzf #{t.name}", *exclude_args, *t.prerequisites]
+  file archive_name do |t|
+    cmd = ['middleman build --verbose']
+    sh cmd.join(' ')
+
+    cmd = ["tar -cvzf #{t.name}", *exclude_args, *FileList[build_dir]]
     sh cmd.join(' ')
   end
 
@@ -51,8 +37,6 @@ namespace :middleman do
       execute :tar, '-xzf', tmp_file, '-C', release_path
       execute :rm, tmp_file
     end
-
-    Rake::Task['middleman:clean'].invoke
   end
 
   task :create_release => :deploy
