@@ -5,7 +5,7 @@ namespace :middleman do
   middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
 
   archive_name      = fetch :archive_name, File.join(Dir.tmpdir, format('deploy-%s.tar.gz', SecureRandom.hex))
-  build_dir         = fetch :build_dir, File.expand_path('build')
+  build_dir         = fetch :build_dir, 'build'
   exclude_dir       = Array(fetch(:exclude_dir))
 
   exclude_args      = exclude_dir.map { |dir| "--exclude '#{dir}'"}
