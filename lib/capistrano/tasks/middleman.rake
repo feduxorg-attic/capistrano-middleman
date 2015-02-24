@@ -1,13 +1,15 @@
 require 'tempfile'
+require 'rake'
 
 namespace :middleman do
-  archive_name = fetch :archive_name, Tempfile.new(%w(deploy .tar.gz))
-  build_dir    = fetch :build_dir, File.expand_path('build')
-  exclude_dir  = Array(fetch(:exclude_dir))
-
-  exclude_args = exclude_dir.map { |dir| "--exclude '#{dir}'"}
-  tar_roles    = fetch(:tar_roles, :all)
   middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
+
+  archive_name      = fetch :archive_name, Tempfile.new(%w(deploy .tar.gz))
+  build_dir         = fetch :build_dir, File.expand_path('build')
+  exclude_dir       = Array(fetch(:exclude_dir))
+
+  exclude_args      = exclude_dir.map { |dir| "--exclude '#{dir}'"}
+  tar_roles         = fetch(:tar_roles, :all)
 
   task :build do
     cmd = []
