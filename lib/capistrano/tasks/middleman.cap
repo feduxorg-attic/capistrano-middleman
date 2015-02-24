@@ -1,5 +1,4 @@
 require 'tempfile'
-require 'rake'
 
 namespace :middleman do
   middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
@@ -20,7 +19,7 @@ namespace :middleman do
     sh cmd.join(' ')
   end
 
-  desc "Archive files to #{archive_name}"
+  desc "Archive files to #{archive_name.path}"
   file archive_name => FileList[build_dir].exclude(archive_name) do |t|
     Rake::Task['middleman:build'].invoke
     cmd = ["tar -cvzf #{t.name}", *exclude_args, *t.prerequisites]
