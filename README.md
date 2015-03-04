@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/capistrano-middleman.svg)](http://badge.fury.io/rb/capistrano-middleman)
 
-Deploy middleman app with the help of capistrano 3.
+Deploy middleman app with the help of [`capistrano`](https://github.com/capistrano/capistrano) (Vers. 3).
 [`capistrano-scm-copy`](https://github.com/wercker/capistrano-scm-copy) was
 quite helpful as template for this gem.
 
