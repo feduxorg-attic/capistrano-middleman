@@ -1,4 +1,6 @@
-# Capistrano::Middleman
+# capistrano-middleman
+
+[![Gem Version](https://badge.fury.io/rb/capistrano-middleman.svg)](http://badge.fury.io/rb/capistrano-middleman)
 
 Deploy middleman app with the help of capistrano 3.
 [`capistrano-scm-copy`](https://github.com/wercker/capistrano-scm-copy) was
@@ -30,9 +32,9 @@ set :scm, :middleman
 
 And make sure you've got the following software installed:
 
-Machine running Capistrano:
+Machine running [`capistrano`](https://github.com/capistrano/capistrano):
 
-* Capistrano 3
+* [capistrano 3](https://github.com/capistrano/capistrano)
 * tar
 
 Servers:
