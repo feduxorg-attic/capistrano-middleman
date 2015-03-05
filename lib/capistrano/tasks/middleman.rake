@@ -42,7 +42,7 @@ namespace :middleman do
       # Upload the archive, extract it and finally remove the tmp_file
       upload!(tarball, tmp_file)
 
-      execute :tar, '-xzf', tmp_file, '-C', release_path
+      execute fetch(:tar, :tar), '-xzf', tmp_file, '-C', release_path
       execute :rm, '-f', tmp_file
     end
   end
