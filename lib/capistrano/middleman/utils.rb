@@ -16,10 +16,12 @@ module Capistrano
         exclude_patterns.each { |e| list.exclude e }
 
         Zip::File.open(destination_file, Zip::File::CREATE) do |z|
-          list.each do |filename|
+          list.uniq.each do |filename|
             paths = []
             paths << Pathname.new(prefix) unless prefix.nil? || prefix.empty?
             paths << Pathname.new(filename).relative_path_from(Pathname.new(working_directory))
+
+            next if z.file.exist? File.join(*paths)
 
             z.add(File.join(*paths), File.expand_path(filename))
 
