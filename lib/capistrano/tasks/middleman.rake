@@ -13,19 +13,23 @@ namespace :middleman do
   tar_roles         = fetch(:tar_roles, :all)
   desc "Archive files to #{archive_name}"
   file archive_name => source_dir do |t|
-    cmd = %w(middleman build)
-    cmd.concat middleman_options
-    sh cmd.join(' ')
+    run_locally do
+      if !File.exist?(build_dir) && !File.exist?(archive_name)
+        cmd = %w(middleman build)
+        cmd.concat middleman_options
+        sh cmd.join(' ')
 
-    Capistrano::Middleman::Utils.zip(
-      build_dir,
-      t.name,
-      working_directory: build_dir,
-      exclude_patterns: exclude_patterns,
-      keep_filesystem_permissions: keep_filesystem_permissions,
-      directory_permissions: directory_permissions,
-      file_permissions: file_permissions
-    )
+        Capistrano::Middleman::Utils.zip(
+          build_dir,
+          t.name,
+          working_directory: build_dir,
+          exclude_patterns: exclude_patterns,
+          keep_filesystem_permissions: keep_filesystem_permissions,
+          directory_permissions: directory_permissions,
+          file_permissions: file_permissions
+        )
+      end
+    end
   end
 
   desc "Build #{archive_name} on localhost"

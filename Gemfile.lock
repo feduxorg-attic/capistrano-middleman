@@ -22,7 +22,7 @@ GIT
 PATH
   remote: .
   specs:
-    capistrano-middleman (0.0.1)
+    capistrano-middleman (0.1.0)
       capistrano (~> 3)
       middleman (~> 3.3)
       rubyzip (~> 1.1.7)
