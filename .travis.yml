@@ -1,0 +1,8 @@
+env:
+  - CI=1
+language: ruby
+bundler_args: --without development debug profile
+rvm:
+  - 2.1.5
+  - 2.2.2
+script: script/test

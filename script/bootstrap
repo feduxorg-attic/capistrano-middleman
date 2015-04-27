@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Bootstrapping development environment for application.." >&2
+
+gem install bundler && bundle install

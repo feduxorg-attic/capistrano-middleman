@@ -1,0 +1,40 @@
+AllCops:
+  Exclude:
+    - 'tmp/**/*'
+  DisplayCopNames: true
+
+Metrics/AbcSize:
+  Max: 38
+
+# Configuration parameters: AllowURI.
+Metrics/LineLength:
+  Max: 225
+
+# Configuration parameters: CountKeywordArgs.
+Metrics/ParameterLists:
+  Max: 6
+
+Style/CaseEquality:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Max: 4
+
+# Configuration parameters: CountComments.
+Metrics/ClassLength:
+  Max: 174
+
+Metrics/CyclomaticComplexity:
+  Max: 7
+
+# Configuration parameters: CountComments.
+Metrics/MethodLength:
+  Max: 76
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+Style/MethodName:
+  Exclude:
+    - lib/proxy_pac_rb/environment.rb
