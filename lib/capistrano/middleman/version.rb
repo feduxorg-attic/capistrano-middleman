@@ -1,7 +1,8 @@
-# Main module
+# encoding: utf-8
+# Capistrano
 module Capistrano
-  # Main module
+  # Middleman
   module Middleman
-    VERSION = '0.0.1'
+    VERSION = '0.1.0'
   end
 end
