@@ -27,6 +27,9 @@ namespace :middleman do
     sh cmd.join(' ')
   end
 
+  desc "Build #{archive_name} on localhost"
+  task build: archive_name
+
   desc "Deploy #{archive_name} to release_path"
   task create_release: archive_name do |t|
     tarball = t.prerequisites.first
