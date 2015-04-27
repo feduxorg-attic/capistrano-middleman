@@ -15,9 +15,7 @@ namespace :middleman do
   file archive_name => source_dir do |t|
     run_locally do
       if !File.exist?(build_dir) && !File.exist?(archive_name)
-        cmd = %w(middleman build)
-        cmd.concat middleman_options
-        sh cmd.join(' ')
+        execute :middleman, 'build', *middleman_options
 
         Capistrano::Middleman::Utils.zip(
           build_dir,
