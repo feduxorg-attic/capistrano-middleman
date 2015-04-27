@@ -24,23 +24,47 @@ Or install it yourself as:
 
 ## Usage
 
-You just need to change `:scm` to `:middleman`.
+
+### Activate plugin
+
+You just need to change `:scm` to `:middleman` in your `deploy.rb`.
 
 ```
 set :scm, :middleman
 ```
 
-And make sure you've got the following software installed:
+### Configuration
 
-Machine running [`capistrano`](https://github.com/capistrano/capistrano):
+You can configure `middleman-presentation` by using the following options:
 
-* [capistrano 3](https://github.com/capistrano/capistrano)
-* tar
+```ruby
+# Local name of archive build from middleman-build-directory
+set :archive_name, 'archive.zip'
+
+# Name of build_directory
+set :build_dir, 'build'
+
+# Name of source directory
+set :source_dir, 'source'
+
+# Keep permissions from filesystem
+set :keep_filesystem_permissions, false
+
+# Overwrite permissions of directories
+set :directory_permissions, 2775
+
+# Overwrite permissions of files
+set :file_permissions, 0664
+```
+
+### Required Software
+
+Machine running [`capistrano`](https://github.com/capistrano/capistrano): [capistrano 3](https://github.com/capistrano/capistrano)
 
 Servers:
 
 * mktemp
-* tar
+* unzip
 
 ## Contributing
 

@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Capistrano::Middleman::VERSION
   spec.authors       = ['Max Meyer']
   spec.email         = ['dev@fedux.org']
-  spec.summary       = %q{Middleman deploy strategy for capistrano}
+  spec.summary       = 'Middleman deploy strategy for capistrano'
   spec.homepage      = 'https://github.com/maxmeyer/capistrano-middleman'
   spec.license       = 'MIT'
 
@@ -21,4 +21,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'middleman', '~> 3.3'
   spec.add_runtime_dependency 'capistrano', '~> 3'
+  spec.add_runtime_dependency 'rubyzip', '~>1.1.7'
 end
