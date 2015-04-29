@@ -1,7 +1,8 @@
 namespace :middleman do
   middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
 
-  archive_name                = fetch :archive_name, 'archive.zip'
+  archive_prefix              = fetch :archive_prefix, 'archive'
+  archive_name                = format('%s-%s.zip', archive_prefix, SecureRandom.hex, '.zip')
   build_dir                   = fetch :build_dir, 'build'
   source_dir                  = fetch :source_dir, 'source'
   keep_filesystem_permissions = fetch :keep_filesystem_permissions, false
@@ -14,19 +15,17 @@ namespace :middleman do
   desc "Archive files to #{archive_name}"
   file archive_name => source_dir do |t|
     run_locally do
-      if !File.exist?(build_dir) && !File.exist?(archive_name)
-        execute :middleman, 'build', *middleman_options
+      execute :middleman, 'build', *middleman_options
 
-        Capistrano::Middleman::Utils.zip(
-          build_dir,
-          t.name,
-          working_directory: build_dir,
-          exclude_patterns: exclude_patterns,
-          keep_filesystem_permissions: keep_filesystem_permissions,
-          directory_permissions: directory_permissions,
-          file_permissions: file_permissions
-        )
-      end
+      Capistrano::Middleman::Utils.zip(
+        build_dir,
+        t.name,
+        working_directory: build_dir,
+        exclude_patterns: exclude_patterns,
+        keep_filesystem_permissions: keep_filesystem_permissions,
+        directory_permissions: directory_permissions,
+        file_permissions: file_permissions
+      )
     end
   end
 
@@ -63,7 +62,7 @@ namespace :middleman do
   desc 'Cleaning up deploy'
   task :clean do |_t|
     FileUtils.rm_rf build_dir
-    FileUtils.rm_rf archive_name
+    FileUtils.rm_rf format('%s-%s.zip', archive_prefix, '*', '.zip')
   end
 
   after 'deploy:finished', 'middleman:clean'
