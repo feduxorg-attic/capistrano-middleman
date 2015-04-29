@@ -2,7 +2,7 @@ namespace :middleman do
   middleman_options = Array(fetch(:middleman_options, %w(--verbose)))
 
   archive_prefix              = fetch :archive_prefix, 'archive'
-  archive_name                = format('%s-%s.zip', archive_prefix, SecureRandom.hex, '.zip')
+  archive_file                = Tempfile.new(%W(#{archive_prefix} .zip))
   build_dir                   = fetch :build_dir, 'build'
   source_dir                  = fetch :source_dir, 'source'
   keep_filesystem_permissions = fetch :keep_filesystem_permissions, false
@@ -12,8 +12,8 @@ namespace :middleman do
   exclude_patterns  = Array(fetch(:exclude_patterns))
 
   tar_roles         = fetch(:tar_roles, :all)
-  desc "Archive files to #{archive_name}"
-  file archive_name => source_dir do |t|
+  desc "Archive files to #{archive_file}"
+  file archive_file => source_dir do |t|
     run_locally do
       execute :middleman, 'build', *middleman_options
 
@@ -29,15 +29,15 @@ namespace :middleman do
     end
   end
 
-  desc "Build #{archive_name} on localhost"
-  task build: archive_name do
+  desc "Build #{archive_file} on localhost"
+  task build: archive_file do
     run_locally do
-      info "Archive \"#{archive_name}\" created."
+      info "Archive \"#{archive_file}\" created."
     end
   end
 
-  desc "Deploy #{archive_name} to release_path"
-  task create_release: archive_name do |t|
+  desc "Deploy #{archive_file} to release_path"
+  task create_release: archive_file do |t|
     archive_file = t.prerequisites.first
 
     on release_roles tar_roles do |host|
@@ -62,7 +62,6 @@ namespace :middleman do
   desc 'Cleaning up deploy'
   task :clean do |_t|
     FileUtils.rm_rf build_dir
-    FileUtils.rm_rf format('%s-%s.zip', archive_prefix, '*', '.zip')
   end
 
   after 'deploy:finished', 'middleman:clean'
