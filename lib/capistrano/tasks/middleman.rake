@@ -52,8 +52,8 @@ namespace :middleman do
       # Upload the archive, extract it and finally remove the tmp_file
       upload!(archive_file, tmp_file)
 
-      umask = capture('umask')
-      debug "umask on remote system #{host} is #{umask}"
+      # umask = capture('umask')
+      # debug "umask on remote system #{host} is #{umask}"
 
       execute :unzip, tmp_file, '-d', release_path
       execute :rm, '-f', tmp_file
