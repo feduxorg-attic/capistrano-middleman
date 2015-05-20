@@ -55,7 +55,7 @@ namespace :middleman do
       # umask = capture('umask')
       # debug "umask on remote system #{host} is #{umask}"
 
-      execute :unzip, tmp_file, '-d', release_path
+      execute :unzip, '-o', tmp_file, '-d', release_path
       execute :rm, '-f', tmp_file
     end
   end
