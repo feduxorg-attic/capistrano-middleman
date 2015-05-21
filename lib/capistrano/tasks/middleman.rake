@@ -71,4 +71,3 @@ namespace :middleman do
   task :check
   task :set_current_revision
 end
-
