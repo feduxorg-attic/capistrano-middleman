@@ -8,10 +8,16 @@ quite helpful as template for this gem.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's `Gemfile`:
 
 ```ruby
 gem 'capistrano-middleman', require: false
+```
+
+and require it in your `Capfile`:
+
+```ruby
+require 'capistrano-middleman'
 ```
 
 And then execute:
