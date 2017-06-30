@@ -30,7 +30,7 @@ module Capistrano
         file_permissions: 0664,
         directory_permissions: 2775
       )
-        list = Rake::FileList.new(File.join(source_directory, '**', '*'))
+        list = Rake::FileList.new(File.join(source_directory, '**', '{*,.*}'))
         list.exclude { |f| !File.file? f }
         exclude_patterns.each { |e| list.exclude e }
 
