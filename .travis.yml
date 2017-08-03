@@ -3,6 +3,9 @@ env:
 language: ruby
 bundler_args: --without development debug profile
 rvm:
-  - 2.1.5
-  - 2.2.2
-script: script/test
+  - 2.0.0
+  - 2.2
+  - 2.4
+  - 2.3
+  - jruby
+script: bin/test
