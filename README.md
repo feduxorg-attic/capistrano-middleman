@@ -14,12 +14,6 @@ Add this line to your application's `Gemfile`:
 gem 'capistrano-middleman', require: false
 ```
 
-and require it in your `Capfile`:
-
-```ruby
-require 'capistrano-middleman'
-```
-
 And then execute:
 
     $ bundle
