@@ -27,7 +27,6 @@ group :development, :test do
   gem 'foreman', require: false
   gem 'fuubar', require: false
   gem 'github-markup'
-  gem 'inch', require: false
   gem 'launchy', require: false
   gem 'license_finder'
   gem 'rack'
