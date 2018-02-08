@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'middleman', '~> 4.0'
   spec.add_runtime_dependency 'capistrano', '~> 3.0'
-  spec.add_runtime_dependency 'rubyzip', '~>1.1.7'
+  spec.add_runtime_dependency 'rubyzip', '~> 1.1'
 end
