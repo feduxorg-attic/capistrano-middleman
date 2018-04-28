@@ -1,4 +1,4 @@
-# I'm sorry, but this gem is not maintained anymore. Please fork or move to some other project. I'm using Ansible now for deployments + GitLab CI
+# WARNING: I'm sorry, but this gem is not maintained anymore. Please fork or move to some other project. I'm using Ansible now for deployments + GitLab CI
 
 
 # capistrano-middleman
